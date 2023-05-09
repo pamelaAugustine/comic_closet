@@ -1,0 +1,26 @@
+.slide{
+    display: grid;
+}
+
+.imgCont{
+    position: relative;
+}
+
+.img{
+    width: 100%;
+    height: auto;
+}
+
+.icon{
+    border-radius: 50%;
+    background-color: #000;
+    height:30px;
+    width:30px;
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+}
+
+.boltIcon{
+    fill: #fff
+}
