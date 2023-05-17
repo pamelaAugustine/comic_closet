@@ -13,6 +13,7 @@
 
 .icon{
     border-radius: 50%;
+    border:2px solid #fff;
     background-color: #000;
     height:30px;
     width:30px;
@@ -22,5 +23,5 @@
 }
 
 .boltIcon{
-    fill: #fff
+    fill: #fff;
 }

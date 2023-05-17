@@ -2,7 +2,8 @@ import Image from 'next/image';
 import Button from './Button';
 import Detail from './Detail';
 import PropTypes from 'prop-types';
-import styles from '@/styles/Comic.module.css'
+import styles from '@/styles/Comic.module.css';
+
 
 export function Comic(props) {
     const { id, title, issueNumber, publishDate, creators, thumbnail } = props;

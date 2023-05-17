@@ -1,5 +1,5 @@
 :root {
-  --page-bg-color: hlsa(60, 30%, 96%, 1);
+  --page-bg-color: hsla(60, 30%, 96%, 1);
 }
 
 html, body{

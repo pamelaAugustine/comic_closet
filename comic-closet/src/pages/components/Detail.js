@@ -4,20 +4,39 @@ import styles from '@/styles/Comic.module.css';
 
 export default function Detail(props) {
     const {title, issueNumber, publishDate, creators} = props
-    const lastNameString = creators.map(creator => creator.name).map(names => {
-        const lastName = names.split(' ');
+// console.log(creators)
+let lastName;
+let lastNameString;
+
+if(creators != null) {
+   lastNameString = creators.map(creator => creator.name).map(names => {
+        console.log(creators.name)
+        lastName = names.split(' ');
         lastName.shift();
-        return lastName;
-      
+        console.log(lastName)
+        return lastName;      
     })
+//   lastNameString.forEach(index =>{
+//     if(index.length > 1){
+//         console.log('lns', lastNameString)
+
+//     }
+//   })
+    //console.log('lns', lastNameString)
+    lastName = lastNameString.join(', ')
+}
+
+else {
+    lastName = 'Coming Soon!'
+}
     return (
         <>
         <div className={styles.content}>
             <h3 className={styles.title}>{title}</h3>
             <div className={styles.details}>
-                <p>Issue: {issueNumber}</p>
-                <p>Published: <Moment format="MMMM DD, YYYY">{publishDate}</Moment></p>
-                <p>Creators: {lastNameString.join(', ')}</p>
+                <p><strong>Issue:</strong> {issueNumber}</p>
+                <p><strong>Published:</strong> <Moment format="MMMM DD, YYYY">{publishDate}</Moment></p>
+                <p><strong>Creators:</strong> {lastName} </p>
             </div>
 
 
