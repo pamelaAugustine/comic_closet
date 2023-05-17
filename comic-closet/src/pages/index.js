@@ -1,10 +1,7 @@
 import Head from 'next/head'
-// import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 import { Comic } from './components/Comic';
-import Static from './api/Static.json';
 import  useMarvelApi  from './api/useMarvelApi';
-// import { timeStamp } from 'console';
 const md5 = require('md5');
 
 export async function getStaticProps(){
@@ -31,9 +28,10 @@ export default function Home({ API_URL }) {
       {isError && !isLoading && <h2>Error Loading Comics</h2>}
 
       {!isLoading && !isError && apiData && 
-      <main className={styles.slides} style={{display:'grid', gap: 30 + 'px', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', padding: 50 + 'px'}}>
+        <main className={styles.slides} style={{display:'grid', gap: 30 + 'px', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', padding: 50 + 'px'}}>
         
         {apiData.map(comic => 
+
           <Comic
           key={comic.id}
           title={comic.title}
@@ -42,13 +40,10 @@ export default function Home({ API_URL }) {
           creators={comic.creators.items.length > 0 ? comic.creators.items : null}
           thumbnail={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
           />
-          )}
-        
-        
-        
-        
-        
-        </main>}
+
+        )} 
+
+      </main>}
 
     </>
   )
