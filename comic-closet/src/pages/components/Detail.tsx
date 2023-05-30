@@ -2,7 +2,14 @@ import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import styles from '@/styles/Comic.module.css';
 
-export default function Detail(props) {
+
+type Props = {
+    title: string,
+    issueNumber: number,
+    publishDate: string,
+    creators: string[]   
+}
+export default function Detail(props: Props) {
     const {title, issueNumber, publishDate, creators} = props;
     let lastName;
     let lastNameString;
@@ -35,11 +42,4 @@ export default function Detail(props) {
         </div>
         </>
     )
-}
-
-Detail.propTypes = {
-    title: PropTypes.string,
-    issueNumber: PropTypes.number,
-    publishDate: PropTypes.string,
-    creators: PropTypes.array
-}
+} 

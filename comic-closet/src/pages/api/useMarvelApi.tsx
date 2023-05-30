@@ -1,6 +1,19 @@
 import { useEffect, useState } from 'react';
 
-export default function useMarvelApi(url) {
+type Data = {
+    isLoading: boolean,
+    apiData: {
+        key: number,
+        title: string,
+        issueNumber: number,
+        publishDate: string,
+        creators: string[],
+        thumbnail: string
+    },
+    isError: string
+}
+
+export default function useMarvelApi(url: string): Data {
     const [ apiData, setApiData ] = useState(null);
     const [ isLoading, setIsLoading ]  = useState(false);
     const [ isError, setIsError ] = useState(null);

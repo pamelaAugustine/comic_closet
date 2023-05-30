@@ -18,6 +18,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/components/Button.js", "src/pages/components/Comic.js", "src/pages/components/Detail.js", "src/pages/_app.js", "src/pages/_document.js", "src/pages/index.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/components/Button.tsx", "src/pages/components/Comic.tsx", "src/pages/components/Detail.tsx", "src/pages/_app.tsx", "src/pages/_document.tsx", "src/pages/index.tsx", "src/pages/api/useMarvelApi.tsx"],
   "exclude": ["node_modules"]
 }
