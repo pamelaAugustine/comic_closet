@@ -2,19 +2,22 @@ import Image from 'next/image';
 import Button from './Button';
 import Detail from './Detail';
 import styles from '@/styles/Comic.module.css';
+import {ComicCreator, Date, ComicThumbnail} from '../types/shared_types'
 
 type Props = {
     id: number,
-    title: string,
-    issueNumber: number,
-    publishDate: string,
-    creators: string[],
-    thumbnail: string
+    key: number
+    title?: string,
+	issueNumber?: number,
+	publishDate?: Date[],
+	creators?: ComicCreator[],
+	thumbnail?: ComicThumbnail[]
 }
 
 export function Comic(props: Props) {
     const { id, title, issueNumber, publishDate, creators, thumbnail } = props;
     const altText = `${title} cover art`
+    const thumbnailSrc = `${thumbnail.path}.${thumbnail.extension}`
 
     return (
 
@@ -22,7 +25,7 @@ export function Comic(props: Props) {
 
             <div className={styles.imgCont}>
                 <Image
-                    src={thumbnail}
+                    src={thumbnailSrc}
                     alt={altText}
                     className={styles.img}
                     width={125}

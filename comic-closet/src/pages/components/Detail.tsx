@@ -1,32 +1,17 @@
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import styles from '@/styles/Comic.module.css';
+import {ComicCreator, Date, CreatorItem} from '../types/shared_types'
 
 
-type Props = {
-    title: string,
-    issueNumber: number,
-    publishDate: string,
-    creators: string[]   
+type DetailProps = {
+	title?: string,
+	issueNumber?: number,
+	publishDate?: Date[],
+	creators?: ComicCreator[]
 }
-export default function Detail(props: Props) {
+export default function Detail(props: DetailProps) {
     const {title, issueNumber, publishDate, creators} = props;
-    let lastName;
-    let lastNameString;
-
-    if(creators != null) {
-        lastNameString = creators.map(creator => creator.name).map(names => {
-                console.log(creators.name)
-                lastName = names.split(' ');
-                lastName.shift();
-                console.log(lastName)
-                return lastName;      
-            })
-        lastName = lastNameString.join(', ')
-    }
-    else {
-        lastName = 'Coming Soon!'
-    }
 
     return (
         <>
@@ -35,8 +20,10 @@ export default function Detail(props: Props) {
 
             <div className={styles.details}>
                 <p><strong>Issue:</strong> {issueNumber}</p>
-                <p><strong>Published:</strong> <Moment format="MMMM DD, YYYY">{publishDate}</Moment></p>
-                <p><strong>Creators:</strong> {lastName} </p>
+                <p><strong>Published:</strong> <Moment format="MMMM DD, YYYY">{publishDate[0].date}</Moment></p>
+				{creators != null &&
+                <p><strong>Creators:</strong> {creators.items.map((creator: CreatorItem) => creator.name).join(', ')}</p>
+            }
             </div>
 
         </div>

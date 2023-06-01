@@ -1,35 +1,24 @@
 import { useEffect, useState } from 'react';
+import { ComicData } from '../types/shared_types'
 
-type Data = {
-    isLoading: boolean,
-    apiData: {
-        key: number,
-        title: string,
-        issueNumber: number,
-        publishDate: string,
-        creators: string[],
-        thumbnail: string
-    },
-    isError: string
-}
-
-export default function useMarvelApi(url: string): Data {
-    const [ apiData, setApiData ] = useState(null);
-    const [ isLoading, setIsLoading ]  = useState(false);
-    const [ isError, setIsError ] = useState(null);
+export default function useFetch(url: string): {isLoading: boolean, ComicData: ComicData, serverError: string | unknown} {
+	const [isLoading, setIsLoading] = useState(true);
+	const [ComicData, setComicData] = useState<ComicData>([{id: 0}]);
+	const [serverError, setServerError] = useState<string | unknown>('');
     
     const fetchApiData = async () => {
         try {
-            setIsLoading(true);
+          
             const res = await fetch(url);
             const data = await res.json();
 
-            setApiData(data.data.results);          
+            setComicData(data.data.results);          
             setIsLoading(false)
+            console.log(data.data.results)
         }
         catch (error){
             console.error(error)
-            setIsError(error)
+            setServerError(error)
             setIsLoading(false)
         }       
     }
@@ -37,6 +26,6 @@ export default function useMarvelApi(url: string): Data {
             fetchApiData();
         }, []);
 
-    return { apiData, isLoading, isError }
+    return { ComicData, isLoading, serverError }
 
 };
