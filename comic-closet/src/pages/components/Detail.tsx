@@ -16,14 +16,17 @@ export default function Detail(props: DetailProps) {
     return (
         <>
         <div className={styles.content}>
-            <h3 className={styles.title}>{title}</h3>
+            <h3 className={styles.title} data-test-id='comic-title'>{title}</h3>
 
             <div className={styles.details}>
-                <p><strong>Issue:</strong> {issueNumber}</p>
-                <p><strong>Published:</strong> <Moment format="MMMM DD, YYYY">{publishDate[0].date}</Moment></p>
-				{creators != null &&
-                <p><strong>Creators:</strong> {creators.items.map((creator: CreatorItem) => creator.name).join(', ')}</p>
-            }
+                <p data-test-id='comic-issueNumber'><strong>Issue:</strong> {issueNumber}</p>
+                <p data-test-id='comic-publishDate'><strong>Published:</strong> <Moment format="MMMM DD, YYYY">{publishDate}</Moment></p>
+				{creators.items.length >= 1 &&
+                <p data-test-id='comic-creators'><strong>Creators:</strong> {creators.items.map((creator: CreatorItem) => creator.name).join(', ')}</p>
+                }
+                {creators.items.length <= 0 &&
+                <p><strong>Creators:</strong> Coming Soon!</p>
+                }
             </div>
 
         </div>

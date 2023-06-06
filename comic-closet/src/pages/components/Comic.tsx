@@ -2,26 +2,21 @@ import Image from 'next/image';
 import Button from './Button';
 import Detail from './Detail';
 import styles from '@/styles/Comic.module.css';
-import {ComicCreator, Date, ComicThumbnail} from '../types/shared_types'
+import { ComicData } from '../types/shared_types'
 
-type Props = {
-    id: number,
-    key: number
-    title?: string,
-	issueNumber?: number,
-	publishDate?: Date[],
-	creators?: ComicCreator[],
-	thumbnail?: ComicThumbnail[]
+type comicDataProps = {
+  comicData: ComicData
 }
 
-export function Comic(props: Props) {
-    const { id, title, issueNumber, publishDate, creators, thumbnail } = props;
-    const altText = `${title} cover art`
-    const thumbnailSrc = `${thumbnail.path}.${thumbnail.extension}`
+export function Comic({ comicData }: comicDataProps) {
+    if(!comicData) return null;
+
+    const altText = `${comicData.title} cover art`
+    const thumbnailSrc = `${comicData.thumbnail.path}.${comicData.thumbnail.extension}`
 
     return (
 
-        <div className={styles.slide}>
+        <div className={styles.slide} data-test-id='comic-parent'>
 
             <div className={styles.imgCont}>
                 <Image
@@ -35,11 +30,11 @@ export function Comic(props: Props) {
             </div>
 
             <Detail
-                key={id}
-                title={title}
-                issueNumber={issueNumber}
-                publishDate={publishDate}
-                creators={creators}
+                key={comicData.id}
+                title={comicData.title}
+                issueNumber={comicData.issueNumber}
+                publishDate={comicData.publishDate}
+                creators={comicData.creators}
             />
 
         </div>

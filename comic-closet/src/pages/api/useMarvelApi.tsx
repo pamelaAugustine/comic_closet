@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { ComicData } from '../types/shared_types'
 
-export default function useFetch(url: string): {isLoading: boolean, ComicData: ComicData, serverError: string | unknown} {
+export default function useFetch(url: string): {isLoading: boolean, comics: ComicData[], serverError: string | unknown} {
 	const [isLoading, setIsLoading] = useState(true);
-	const [ComicData, setComicData] = useState<ComicData>([{id: 0}]);
+	const [comics, setComics] = useState<ComicData[]>([]);
 	const [serverError, setServerError] = useState<string | unknown>('');
     
     const fetchApiData = async () => {
@@ -12,9 +12,8 @@ export default function useFetch(url: string): {isLoading: boolean, ComicData: C
             const res = await fetch(url);
             const data = await res.json();
 
-            setComicData(data.data.results);          
+            setComics(data.data.results);          
             setIsLoading(false)
-            console.log(data.data.results)
         }
         catch (error){
             console.error(error)
@@ -26,6 +25,6 @@ export default function useFetch(url: string): {isLoading: boolean, ComicData: C
             fetchApiData();
         }, []);
 
-    return { ComicData, isLoading, serverError }
+    return { comics, isLoading, serverError }
 
 };
