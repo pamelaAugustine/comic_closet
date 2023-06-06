@@ -3,6 +3,17 @@ import styles from '@/styles/Home.module.css'
 import { Comic } from './components/Comic';
 import  useMarvelApi  from './api/useMarvelApi';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import HeroImage from './components/HeroImage';
+import Intro from './components/Intro';
+import { Montserrat } from 'next/font/google'
+
+const montserrat = Montserrat({
+  subsets: ['latin'],
+  variable: '--font-display'
+})
+
 const md5 = require('md5');
 
 export const getStaticProps: GetStaticProps = async() => {
@@ -23,23 +34,32 @@ export default function Home({ API_URL }: InferGetStaticPropsType<typeof getStat
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <header>
+        <Header />
+      </header>
 
       {isLoading && <h2>Loading Comics...</h2>}
       {serverError && !isLoading && <h2>Error Loading Comics</h2>}
-
       {!isLoading && !serverError && comics && 
-        <main className={styles.slides} style={{display:'grid', gap: 30 + 'px', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', padding: 50 + 'px'}}>
-        
-        {comics.map(comic => 
-
-          <Comic
-          key={comic.id}
-          comicData={comic}
-          />
-
-        )} 
-
-      </main>}
+        <main>
+          <div>
+            <Intro />
+          </div>
+          <div className={styles.slides} style={{display:'grid', gap: 30 + 'px', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', padding: 50 + 'px'}}>
+          
+            {comics.map(comic => 
+              <Comic
+              key={comic.id}
+              comicData={comic}
+              />
+            )} 
+            
+          </div>
+        </main>
+      }
+      <footer>
+        <Footer />
+      </footer>
 
     </>
   )
