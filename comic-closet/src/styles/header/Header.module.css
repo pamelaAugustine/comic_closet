@@ -1,0 +1,31 @@
+.headerContainer {
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+}
+
+.logoContainer {
+	position: relative;
+	overflow: hidden;
+	width: 75px;
+	height: 75px;
+}
+
+@media (min-width: 64em) {
+	.headerContainer {
+		padding: 20px 60px;
+	}
+
+	.logoContainer {
+		position: relative;
+		overflow: hidden;
+		width: 106px;
+		height: 106px;
+	}
+}

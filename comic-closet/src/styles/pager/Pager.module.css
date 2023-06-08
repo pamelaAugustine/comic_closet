@@ -1,0 +1,40 @@
+.pagerContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	grid-column: 1;
+	grid-row: 3;
+	width: 100%;
+}
+
+.inner {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.pagerButton {
+	height: 35px;
+	width: 35px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 100%;
+	background-color: var(--dark-gray);
+	padding: 0;
+	margin: 0;
+	border: unset;
+	cursor: pointer;
+}
+
+.pagerButton svg {
+	color: var(--off-white);
+	pointer-events: none;
+	font-size: 1.125rem;
+}
+
+.pagerInfo {
+	font-family: var(--font-body);
+	font-size: 1.125rem;
+	color: var(--dark-gray);
+}

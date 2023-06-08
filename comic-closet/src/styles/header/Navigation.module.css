@@ -1,0 +1,101 @@
+.navigationContainer {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+.mainNav {
+	position: absolute;
+	top: 45px;
+	right: -20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background: var(--dark-gray);
+	opacity: 0;
+	pointer-events: none;
+	padding: 15px;
+	transition: opacity 300ms ease-out;
+}
+
+.mainNav.active {
+	opacity: 1;
+	pointer-events: all;
+}
+
+.navLink,
+.favoritesCaption,
+.favoritesNumber {
+	font-family: var(--font-display);
+	font-size: 1.125rem;
+	font-weight: 700;
+	line-height: 1;
+	color: var(--off-white);
+	text-decoration: none;
+}
+
+.navLink {
+	padding: 15px;
+}
+
+.favoritesCaption {
+	display: none;
+}
+
+.favoritesNumber {
+	font-weight: 400;
+}
+
+.favoritesContainer {
+	display: flex;
+	gap: 5px;
+	align-items: center;
+}
+
+.favoritesContainer svg {
+	width: 11px;
+	height: 18px;
+	color: var(--off-white);
+}
+
+.mobileMenuButton {
+	width: 55px;
+	height: 43px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: unset;
+	border: 2px solid var(--off-white);
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.mobileMenuButton svg {
+	width: 18px;
+	height: 21px;
+	color: var(--off-white)
+}
+
+@media (min-width: 64em) {
+	.navigationContainer .mainNav {
+		display: block;
+		position: static;
+		background: unset;
+		opacity: 1;
+		padding: 0;
+		pointer-events: all;
+	}
+
+	.mobileMenuButton {
+		display: none;
+	}
+
+	.favoritesCaption {
+		display: inline-block;
+	}
+
+	.navLink {
+		padding: 0 15px;
+	}
+}

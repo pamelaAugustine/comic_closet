@@ -1,7 +1,23 @@
 :root {
-  --page-bg-color: hsla(60, 30%, 96%, 1);
+	/* Colors */
+	--off-white: hsla(60, 30%, 96%, 1);
+	--dark-gray: hsla(0, 0%, 13%, 1);
+	--pink: hsla(344, 50%, 52%, 1);
+	--blue: hsla(168, 34%, 72%, 1);
+
+	/* Page Background */
+	--page-background-color: var(--off-white);
 }
 
-html, body{
-  background-color: var(--page-bg-color);
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+html,
+body {
+	max-width: 100vw;
+	overflow-x: hidden;
+	background-color: var(--page-background-color);
 }
