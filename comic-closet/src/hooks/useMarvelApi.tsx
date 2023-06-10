@@ -6,7 +6,6 @@ export default function useFetch(url: string): {isLoading: boolean, comics: Comi
 	const [comics, setComics] = useState<ComicData[]>([]);
 	const [serverError, setServerError] = useState<string | unknown>('');
     const [total, setTotal] = useState<number>(0);
-    
     const fetchApiData = async () => {
         try {
           
@@ -25,7 +24,7 @@ export default function useFetch(url: string): {isLoading: boolean, comics: Comi
     }
         useEffect(() => {
             fetchApiData();
-        }, []);
+        }, [url]);
 
     return { comics, isLoading, total, serverError }
 

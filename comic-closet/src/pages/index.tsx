@@ -23,9 +23,9 @@ const montserrat = Montserrat({
 const md5 = require('md5');
 
 export const getStaticProps: GetStaticProps = async() => {
-  const timestamp: number = Date.now();
+  	const timestamp: number = Date.now();
 	const hash: string = md5(`${timestamp}${process.env.PRIVATE_API_KEY}${process.env.PUBLIC_API_KEY}`)
-	const publicKey: string = process.env.PUBLIC_API_KEY
+	const publicKey = process.env.PUBLIC_API_KEY
 	const requiredParameters = `ts=${timestamp}&apikey=${publicKey}&hash=${hash}`
 	const comicLimit = 15;
 
@@ -36,14 +36,14 @@ export const getStaticProps: GetStaticProps = async() => {
 
 export default function Home({ API_URL, requiredParameters, comicLimit }: InferGetStaticPropsType<typeof getStaticProps>) {
 	const [query, setQuery] = useState<string>(API_URL);
-	const [favorites, setFavorites] = useState<ComicData[]>([]);
+	const [favorites, setFavorites] = useState<ComicData[]>([]);	
 	const [characterId, setCharacterId] = useState<string>('');
 	const [creatorId, setCreatorId] = useState<string>('');
 	const [offset, setOffset] = useState<number>(0)
 	const { isLoading, serverError, comics, total } = useMarvelApi(query);
 	let initialRender = useRef(true);
 
-	//Grab favorited comics from local storage
+	//Get favorited comics from local storage
 	useEffect(() => {
 		const favoriteComicsList = localStorage.getItem("Favorite_Comics");
 		if (favoriteComicsList) {
@@ -53,8 +53,7 @@ export default function Home({ API_URL, requiredParameters, comicLimit }: InferG
 
 	useEffect(() => {
 		if (!initialRender.current) {
-			let newQuery: string;
-
+			let newQuery: string;		
 			if (characterId !== '' && creatorId === '') {
 				newQuery=`https://gateway.marvel.com/v1/public/characters/${characterId}/comics?limit=${comicLimit}&offset=${offset}&${requiredParameters}`
 			} else if (characterId === '' && creatorId !== '') {
@@ -64,7 +63,6 @@ export default function Home({ API_URL, requiredParameters, comicLimit }: InferG
 			} else {
 				newQuery = `https://gateway.marvel.com/v1/public/comics?limit=${comicLimit}&offset=${offset}&${requiredParameters}`;
 			}
-
 			setQuery(newQuery);
 		}
 
@@ -78,7 +76,7 @@ export default function Home({ API_URL, requiredParameters, comicLimit }: InferG
 		const id = target.value;
 		const name = target.name;
 
-		//Set offset back to zero so that we go back to the first page of comics when we change our filter.
+		//Offset reset to zero when filtering
 		setOffset(0);
 		name === 'characterFilter' ? setCharacterId(id) : setCreatorId(id)
 	}
