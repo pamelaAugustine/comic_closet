@@ -6,43 +6,48 @@ import styles from '../../styles/comic/Comic.module.css'
 
 type buttonProps = {
 	comicData: ComicData;
-	isFavorite: ComicData;
+	isFavorite: boolean;
 	isFavoritesFull: boolean;
 }
 
-type addToFavorites = () => void
-type removeFromFavorites = () => void;
+type AddToFavorites = () => void;
+type RemoveFromFavorites = () => void;
 
 export default function Button({ comicData, isFavorite, isFavoritesFull }: buttonProps) {
 
-	const context = useContext<favoritesContextType>(favoritesContext)
+	const context = useContext<favoritesContextType | null>(favoritesContext)
 
-	function addToFavorites(): addToFavorites {
-		if(isFavoritesFull) return;
+	const addToFavorites: AddToFavorites = () => {
+        if (isFavoritesFull || !context) return;
 
-		context.setFavorites(prevFavorites => {
-			const newFavorites: ComicData[] = [...prevFavorites, {...comicData}]
-			localStorage.setItem(
-				"Favorite_Comics",
-				JSON.stringify(newFavorites)
-			);
-			return newFavorites;
-		});
-	}
+        context.setFavorites(prevFavorites => {
+            const newFavorites: ComicData[] = [...prevFavorites, { ...comicData }];
+            localStorage.setItem(
+                "Favorite_Comics",
+                JSON.stringify(newFavorites)
+            );
+            return newFavorites;
+        });
+    }
 
-	function removeFromFavorites(): removeFromFavorites {
-		context.setFavorites(prevFavorites => {
-			const newFavorites: ComicData[] = [...prevFavorites]
-			const index: number = prevFavorites.findIndex(favorite => favorite.id === comicData.id);
-			newFavorites.splice(index, 1);
-			localStorage.setItem(
-				"Favorite_Comics",
-				JSON.stringify(newFavorites)
-			);
-			return newFavorites;
-		});
-		return;
-	}
+	const removeFromFavorites: RemoveFromFavorites = () => {
+        if (!context) return;
+
+        context.setFavorites(prevFavorites => {
+            const newFavorites: ComicData[] = [...prevFavorites];
+            const index: number = prevFavorites.findIndex(favorite => favorite.id === comicData.id);
+            
+            if (index !== -1) {
+                newFavorites.splice(index, 1);
+                localStorage.setItem(
+                    "Favorite_Comics",
+                    JSON.stringify(newFavorites)
+                );
+            }
+
+            return newFavorites;
+        });
+    }
 	
 	return (
 		<button

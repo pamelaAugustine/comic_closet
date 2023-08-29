@@ -6,7 +6,7 @@ import { montserrat } from '../../fonts/index'
 
 export default function Navigation() {
 	const [showNav, setShowNav] = useState<boolean>(false);
-	const context = useContext<favoritesContextType>(favoritesContext)
+	const context = useContext<favoritesContextType | null>(favoritesContext)
 
 	function toggleNav(): void {
 		setShowNav(prev => !prev);
@@ -21,7 +21,7 @@ export default function Navigation() {
 			<div className={styles.favoritesContainer}>
 				<FaBolt />
 				<span className={styles.favoritesCaption}>My Favorites</span>
-				<span className={styles.favoritesNumber}>({context.favorites.length})</span>
+				<span className={styles.favoritesNumber}>({context?.favorites.length})</span>
 			</div>
 			<button className={styles.mobileMenuButton} onClick={toggleNav}>
 				<FaBars />

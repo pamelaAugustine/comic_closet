@@ -10,7 +10,7 @@ type FavoritesProps = {
 }
 
 export default function Favorites({handleCloseButtonClick}: FavoritesProps) {
-	const context = useContext<favoritesContextType>(favoritesContext)
+	const context = useContext<favoritesContextType | null>(favoritesContext)
 
 	return (
 		<div className={`${styles.favoritesContainer} ${montserrat.variable}`}>
@@ -18,7 +18,7 @@ export default function Favorites({handleCloseButtonClick}: FavoritesProps) {
 				<h2 className={styles.favoritesTitle}>Favorites</h2>
 				<div className={styles.comicGrid}>
 					{
-						context.favorites.map((comic) => {
+						context?.favorites.map((comic) => {
 							return (
 								<FavoritesItem 
 									key={comic.id}
