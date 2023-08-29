@@ -54,6 +54,9 @@
 	cursor: pointer;
 	transition: border-color 300ms ease-out, background-color 300ms ease-out
 }
+.cta svg{
+	fill: #fff;
+}
 
 .cta.selected {
 	border-color: var(--off-white);
