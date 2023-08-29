@@ -13,10 +13,11 @@ type comicDataProps = {
 export default function Comic({ comicData }: comicDataProps) {
 	if(!comicData) return null;
 
-	const context = useContext<favoritesContextType>(favoritesContext)
+	const context = useContext<favoritesContextType | null>(favoritesContext)
 
-	const isFavoritesFull: boolean = context.favorites.length >= 10;
-	const isFavorite: ComicData = context.favorites.find(favorite => favorite.id === comicData.id);
+	const isFavorite: boolean = (context?.favorites || []).some(favorite => favorite.id === comicData.id);
+
+    const isFavoritesFull: boolean = context?.favorites?.length ? context.favorites.length >= 10 : false;
 	
 	const thumbnailSrc = `${comicData.thumbnail.path}.${comicData.thumbnail.extension}`
 	const altDescription = `${comicData.title} issue:${comicData.issueNumber} cover art`

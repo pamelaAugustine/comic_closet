@@ -21,13 +21,13 @@ type removeFromFavorites = () => void;
 export default function FavoritesItem( props: FavoriteItemProp ) {
 	const { id, title, issueNumber, thumbnail } = props
 
-	const context = useContext<favoritesContextType>(favoritesContext)
+	const context = useContext<favoritesContextType | null>(favoritesContext)
 
 	const thumbnailSrc = `${thumbnail.path}.${thumbnail.extension}`
 	const altDescription = `${title} issue:${issueNumber} cover art`
 
-	function removeFromFavorites(): removeFromFavorites {
-		context.setFavorites(prevFavorites => {
+	function removeFromFavorites(): void {
+		context?.setFavorites(prevFavorites => {
 			const newFavorites: ComicData[] = [...prevFavorites]
 			const index: number = prevFavorites.findIndex(favorite => favorite.id === id);
 			newFavorites.splice(index, 1);
