@@ -25,12 +25,12 @@ export default function Detail(props: DetailProps) {
 					<strong>Published: </strong>
 					<Moment format="MMMM DD, YYYY">{publishDate}</Moment>
 				</p>
-				{creators.items.length > 1 &&
-					<p data-testid='comic-creators'>
-						<strong>Creators: </strong>
-						{creators.items.map((creator: CreatorItem) => creator.name).join(', ')}
-					</p>
-				}
+				{creators.items && creators.items.length > 1 ? (
+                    <p data-testid='comic-creators'>
+                        <strong>Creators: </strong>
+                        {creators.items.map((creator: CreatorItem) => creator.name).join(', ')}
+                    </p>
+                ) : null}
 			</div>
 		</div>
 	)
