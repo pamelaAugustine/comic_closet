@@ -11,9 +11,9 @@ type comicDataProps = {
 }
 
 export default function Comic({ comicData }: comicDataProps) {
-	if(!comicData) return null;
-
 	const context = useContext<favoritesContextType | null>(favoritesContext)
+	
+	if(!comicData) return null;
 
 	const isFavorite: boolean = (context?.favorites || []).some(favorite => favorite.id === comicData.id);
 

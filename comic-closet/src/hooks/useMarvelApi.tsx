@@ -6,25 +6,25 @@ export default function useFetch(url: string): {isLoading: boolean, comics: Comi
 	const [comics, setComics] = useState<ComicData[]>([]);
 	const [serverError, setServerError] = useState<string | unknown>('');
     const [total, setTotal] = useState<number>(0);
-    const fetchApiData = async () => {
-        try {
-          
-            const res = await fetch(url);
-            const data = await res.json();
+    useEffect(() => {
+        const fetchApiData = async () => {
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
 
-            setComics(data.data.results); 
-            setTotal(data.data.total)         
-            setIsLoading(false)
-        }
-        catch (error){
-            console.error(error)
-            setServerError(error)
-            setIsLoading(false)
-        }       
-    }
-        useEffect(() => {
-            fetchApiData();
-        }, [url]);
+                setComics(data.data.results); 
+                setTotal(data.data.total);         
+                setIsLoading(false);
+            }
+            catch (error) {
+                console.error(error);
+                setServerError(error);
+                setIsLoading(false);
+            }       
+        };
+
+        fetchApiData();
+    }, [url]);
 
     return { comics, isLoading, total, serverError }
 
