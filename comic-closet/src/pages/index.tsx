@@ -69,7 +69,7 @@ export default function Home({ API_URL, requiredParameters, comicLimit }: InferG
 		return () => {
 			initialRender.current = false;
 		}
-	}, [characterId, creatorId, offset])
+	}, [comicLimit, requiredParameters, characterId, creatorId, offset])
 
 	function updateFilter(event: React.ChangeEvent): void {
 		const target = event.target as HTMLSelectElement;
