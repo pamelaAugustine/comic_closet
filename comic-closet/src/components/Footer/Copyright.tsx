@@ -6,6 +6,6 @@ export default function Copyright() {
 	const year = date.getFullYear()
 
 	return (
-		<p className={`${styles.copyright} ${montserrat.variable}`}>Copyright {year}. Comic Closet, LLC. All rights reserved.</p>
+		<p className={`${styles.copyright} ${montserrat.variable}`}>Copyright {year}. Pamela Augustine</p>
 	)
 }
