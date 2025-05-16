@@ -24,13 +24,12 @@ const md5 = require('md5');
 
 export const getStaticProps: GetStaticProps = async() => {
   	const timestamp: number = Date.now();
-	const hash: string = md5(`${timestamp}${process.env.PRIVATE_API_KEY}${process.env.PUBLIC_API_KEY}`)
-	const publicKey = process.env.PUBLIC_API_KEY
+	const hash: string = md5(`${timestamp}${process.env.PRIVATE_API_KEY}${process.env.NEXT_PUBLIC_PUBLIC_API_KEY}`)
+	const publicKey = process.env.NEXT_PUBLIC_PUBLIC_API_KEY
 	const requiredParameters = `ts=${timestamp}&apikey=${publicKey}&hash=${hash}`
 	const comicLimit = 15;
-
 	let API_URL: string = `https://gateway.marvel.com/v1/public/comics?limit=${comicLimit}&offset=0&${requiredParameters}`
-
+	
 	return { props: { API_URL, requiredParameters, comicLimit } }
 }
 
