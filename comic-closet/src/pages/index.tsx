@@ -146,4 +146,3 @@ export default function Home({ API_URL, requiredParameters, comicLimit }: InferG
 		</>
 	)
 }
-
