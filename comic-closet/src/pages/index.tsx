@@ -22,16 +22,18 @@ const montserrat = Montserrat({
 
 const md5 = require('md5');
 
-export const getStaticProps: GetStaticProps = async() => {
-  	const timestamp: number = Date.now();
-	const hash: string = md5(`${timestamp}${process.env.PRIVATE_API_KEY}${process.env.NEXT_PUBLIC_PUBLIC_API_KEY}`)
-	const publicKey = process.env.NEXT_PUBLIC_PUBLIC_API_KEY
-	const requiredParameters = `ts=${timestamp}&apikey=${publicKey}&hash=${hash}`
-	const comicLimit = 15;
-	let API_URL: string = `https://gateway.marvel.com/v1/public/comics?limit=${comicLimit}&offset=0&${requiredParameters}`
-	
-	return { props: { API_URL, requiredParameters, comicLimit } }
-}
+export const getStaticProps: GetStaticProps = async () => {
+  const timestamp = Date.now().toString(); 
+  const hash = md5(`${timestamp}${process.env.PRIVATE_API_KEY}${process.env.NEXT_PUBLIC_PUBLIC_API_KEY}`);
+  const publicKey = process.env.NEXT_PUBLIC_PUBLIC_API_KEY;
+  const requiredParameters = `ts=${timestamp}&apikey=${publicKey}&hash=${hash}`;
+  const comicLimit = 15;
+  const API_URL = `https://gateway.marvel.com/v1/public/comics?limit=${comicLimit}&offset=0&${requiredParameters}`;
+
+  return {
+    props: { API_URL, requiredParameters, comicLimit },
+  };
+};
 
 export default function Home({ API_URL, requiredParameters, comicLimit }: InferGetStaticPropsType<typeof getStaticProps>) {
 	const [query, setQuery] = useState<string>(API_URL);
