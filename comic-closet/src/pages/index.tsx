@@ -27,14 +27,20 @@ export const getStaticProps: GetStaticProps = async () => {
   const publicKey = process.env.NEXT_PUBLIC_PUBLIC_API_KEY;
   const privateKey = process.env.PRIVATE_API_KEY;
   const comicLimit = 15;
+
+  if (!publicKey || !privateKey) {
+    throw new Error("Missing Marvel API keys in environment variables");
+  }  
+
   const hash = md5(timestamp + privateKey + publicKey);
   const requiredParameters = `ts=${timestamp}&apikey=${publicKey}&hash=${hash}`;
   const API_URL = `https://gateway.marvel.com/v1/public/comics?limit=${comicLimit}&offset=0&${requiredParameters}`;
-
+  
   return {
     props: { API_URL, requiredParameters, comicLimit },
   };
 };
+
 
 export default function Home({ API_URL, requiredParameters, comicLimit }: InferGetStaticPropsType<typeof getStaticProps>) {
 	const [query, setQuery] = useState<string>(API_URL);
